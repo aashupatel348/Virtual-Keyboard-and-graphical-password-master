@@ -1,0 +1,1501 @@
+<!--<?php
+	
+	include("conn.php");
+	session_start();
+	$error = "";
+	
+	
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "web";
+
+	$user = $_SESSION['login_user'];
+	
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+    $query = "SELECT * FROM marry WHERE email LIKE '$user'";
+$result = $conn->query($query);
+if ($result->num_rows > 0) 
+    {
+    // output data of each rowecho
+    while($row = $result->fetch_assoc()) {
+        $pass=$row['pass'];
+	$color=$row['color'];
+}
+}
+	
+
+	if(isset($_POST['submit'])){
+		//username and password sent from form 
+		$myusername = $user;
+$colorq = $_POST['color'];
+		$passq = $_POST['pass'];
+		 
+		$query = "SELECT * FROM marry WHERE email='$user' AND pass='$passq'";
+	$result = $conn->query($query);
+		if ($result->num_rows > 0) 
+    {
+			header("location: index.php");
+		}else {
+			$error = "Incorrect  Password ";
+		}	
+	
+	}	
+?>-->
+
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta charset="UTF-8">
+
+  <title> Login Form</title>
+<style>
+body {  background: #eee;
+font-size: 100%;
+font-family: "Trebuchet MS",Verdana, Arial, Helvetica, sans-serif;
+padding-top: 100px;
+}
+label { display: block; margin-top: 10px; }
+#login { width: 300px; margin: 0 auto; border: 1px solid #eee; padding: 25px; background-color: #FFFFCC; }
+a { color: #0066CC; text-decoration: none; border-bottom: 1px dotted #0066cc; }
+#submit_butt { margin-top: 15px; }
+h3 { margin-top: 0; }
+.button {
+    border: none;
+    color: white;
+    padding: 1px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+.keyboardtblenb {
+padding:9px;
+background:#f0f5f7;
+text-align:center;
+font-weight:bold;
+vertical-align:middle;
+border:1px solid #377292;
+font-size:11px;
+}
+.keyboardtblenbs {
+padding:9px 50px;
+background:#f0f5f7;
+text-align:center;
+font-weight:bold;
+vertical-align:middle;
+border:1px solid #377292;
+font-size:11px;
+
+}
+
+</style>
+
+    <style>
+
+body{
+	margin: 0;
+	padding: 0;
+	background: #fff;
+
+	color: #fff;
+	font-family: Arial;
+	font-size: 12px;
+}
+
+.body{
+	position: absolute;
+	top: -20px;
+	left: -20px;
+	right: -40px;
+	bottom: -40px;
+	width: auto;
+	height: auto;
+	background-image: url(wed.jpg);
+	background-size: cover;
+	-webkit-filter: blur(5px);
+	z-index: 0;
+}
+
+.grad{
+	position: absolute;
+	top: -20px;
+	left: -20px;
+	right: -40px;
+	bottom: -40px;
+	width: auto;
+	height: auto;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.65))); /* Chrome,Safari4+ */
+	z-index: 1;
+	opacity: 0.7;
+}
+
+.header{
+	position: absolute;
+	top: calc(50% - 35px);
+	left: calc(50% - 255px);
+	z-index: 2;
+}
+
+.header div{
+	float: left;
+	color: #fff;
+	font-family: 'Exo', sans-serif;
+	font-size: 35px;
+	font-weight: 200;
+}
+
+.header div span{
+	color: #5379fa !important;
+}
+
+.login{
+	position: absolute;
+	top: calc(50% - 75px);
+	left: calc(50% - 50px);
+	height: 200px;
+	width: 600px;
+	padding: 10px;
+	z-index: 2;
+}
+
+.login input[type=text]{
+	width: 250px;
+	height: 30px;
+	background: transparent;
+	border: 1px solid rgba(255,255,255,0.6);
+	border-radius: 2px;
+	color: #fff;
+	font-family: 'Exo', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 4px;
+}
+
+.login input[type=password]{
+	width: 250px;
+	height: 30px;
+	background: transparent;
+	border: 1px solid rgba(255,255,255,0.6);
+	border-radius: 2px;
+	color: #fff;
+	font-family: 'Exo', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 4px;
+	margin-top: 10px;
+}
+
+
+
+
+.login input[type=text]:focus{
+	outline: none;
+	border: 1px solid rgba(255,255,255,0.9);
+}
+
+.login input[type=password]:focus{
+	outline: none;
+	border: 1px solid rgba(255,255,255,0.9);
+}
+
+::-webkit-input-placeholder{
+   color: rgba(255,255,255,0.6);
+}
+
+::-moz-input-placeholder{
+   color: rgba(255,255,255,0.6);
+}
+</style>
+    <script src="prefixfree.min.js"></script>
+<link href="bootstrap-3.1.1.min.css" rel='stylesheet' type='text/css' />
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="jquery.min.js"></script>
+<script src="bootstrap.min.js"></script>
+<!-- Custom Theme files -->
+<link href="style.css" rel='stylesheet' type='text/css' />
+<link href='//fonts.googleapis.com/css?family=Oswald:300,400,700' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Ubuntu:300,400,500,700' rel='stylesheet' type='text/css'>
+<!----font-Awesome----->
+<link href="font-awesome.css" rel="stylesheet"> 
+<!----font-Awesome----->
+<script>
+    var divs = ["keyboard", "wheel"];
+    var visibleDivId = null;
+    function toggleVisibility(divId) {
+      if(visibleDivId === divId) {
+        //visibleDivId = null;
+      } else {
+        visibleDivId = divId;
+      }
+      hideNonVisibleDivs();
+    }
+    function hideNonVisibleDivs() {
+      var i, divId, div;
+      for(i = 0; i < divs.length; i++) {
+        divId = divs[i];
+        div = document.getElementById(divId);
+        if(visibleDivId === divId) {
+          div.style.display = "block";
+        } else {
+          div.style.display = "none";
+        }
+      }
+    }
+</script>
+<body>
+<!-- ============================  Navigation Start =========================== -->
+ <div class="navbar navbar-inverse-blue navbar">
+    <!--<div class="navbar navbar-inverse-blue navbar-fixed-top">-->
+      <div class="navbar-inner navbar-inner_1">
+        <div class="container">
+           <div class="pull-right">
+          	<nav class="navbar nav_bottom" role="navigation">
+ 
+		 <!-- Brand and toggle get grouped for better mobile display -->
+		  <div class="navbar-header nav_2">
+
+		   </div> 
+		   <!-- Collect the nav links, forms, and other content for toggling -->
+		    <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
+		        <ul class="nav navbar-nav nav_1">
+		            
+		          <li class="dropdown">
+		             <label><h2><b></b></h2></label><br>
+		              </ul>
+		            </li>
+	
+		     </div><!-- /.navbar-collapse -->
+		    </nav>
+		   </div> <!-- end pull-right -->
+          <div class="clearfix"> </div>
+        </div> <!-- end container -->
+      </div> <!-- end navbar-inner -->
+    </div> <!-- end navbar-inverse-blue -->
+<!-- ============================  Navigation End ============================ -->
+<form method="POST">
+<br>
+<br>
+ <center> <h2> Login </h2></center>
+<center>
+Password :-
+<input type="password" name="pass" id="v1" required/>
+<input id = "submitbtn" name="submit" value="Submit" type="button" onclick="login()">
+<br>
+</form>
+<a href="#" onclick="toggleVisibility('keyboard');">keyboard</a> | <a href="#" onclick="toggleVisibility('wheel');">Graphical Password</a>
+
+<div id="keyboard"  >
+<br><br><br><br>
+<div id="row0"  >
+		<input  type="button" value="" onclick="getval0()" id="myButton1" class="keyboardtblenb"/>
+		<input  type="button" value="" onclick="getval1()" id="myButton2" class="keyboardtblenb"/>
+		<input  type="button" value= "" onclick="getval2()" id="myButton3" class="keyboardtblenb"/>
+		<input  type="button" value= "" onclick="getval3()" id="myButton4" class="keyboardtblenb"/>
+		<input  type="button" value= "" onclick="getval4()" id="myButton5" class="keyboardtblenb"/>
+		<input  type="button" value= "" onclick="getval5()" id="myButton6" class="keyboardtblenb"/>
+		<input  type="button" value= "" onclick="getval6()" id="myButton7" class="keyboardtblenb"/>
+		<input  type="button" value= "" onclick="getval7()" id="myButton8" class="keyboardtblenb"/>
+		<input  type="button" value= "" onclick="getval8()" id="myButton9" class="keyboardtblenb"/>
+		<input  type="button" value= "" onclick="getval9()" id="myButton10" class="keyboardtblenb"/>
+		<input  type="button" value= "" onclick="getval10()" id="myButton11" class="keyboardtblenb"/>
+		<input  type="button" value= "" onclick="getval11()" id="myButton12" class="keyboardtblenb"/>
+		<input  type="button" value= "" onclick="getval12()" id="myButton13" class="keyboardtblenb"/>
+		<input  type="button" value="Backspace" onclick="getback()" id="backspace" class="keyboardtblenb"/>
+	</div>
+	
+	<div id="row1">
+		<input type="button" value="" onclick="getval13()" id="myButton14" class="keyboardtblenb" />
+		<input type="button" value="" onclick="getval14()" id="myButton15" class="keyboardtblenb" />
+		<input type="button" value="" onclick="getval15()" id="myButton16" class="keyboardtblenb"/>
+		<input type="button" value="" onclick="getval16()" id="myButton17" class="keyboardtblenb"/>
+		<input type="button" value="" onclick="getval17()" id="myButton18" class="keyboardtblenb"/>
+		<input type="button" value="" onclick="getval18()" id="myButton19" class="keyboardtblenb"/>
+		<input type="button" value="" onclick="getval19()" id="myButton20" class="keyboardtblenb"/>
+		<input type="button" value="" onclick="getval20()" id="myButton21" class="keyboardtblenb"/>
+		<input type="button" value="" onclick="getval21()" id="myButton22" class="keyboardtblenb"/>
+		<input type="button" value="" onclick="getval22()" id="myButton23" class="keyboardtblenb"/>
+		<input type="button" value="" onclick="getval23()" id="myButton24" class="keyboardtblenb"/>
+		<input type="button" value="" onclick="getval24()" id="myButton25" class="keyboardtblenb"/>
+		<input type="button" value="" onclick="getval25()" id="myButton26" class="keyboardtblenb"/>
+	</div>	
+	<div id="row2">
+			<input type="button" value="capslock" onclick="getcaps()" id="capslock" class="keyboardtblenb"/>
+
+		<input type="button" value="" onclick="getval26()" id="myButton27" class="keyboardtblenb"/>
+		<input type="button" value="" onclick="getval27()" id="myButton28" class="keyboardtblenb"/>
+		<input type="button" value="" onclick="getval28()" id="myButton29" class="keyboardtblenb"/>
+		<input type="button" value="" onclick="getval29()" id="myButton30" class="keyboardtblenb"/>
+		<input type="button" value="" onclick="getval30()" id="myButton31" class="keyboardtblenb"/>
+		<input type="button" value="" onclick="getval31()" id="myButton32" class="keyboardtblenb"/>
+		<input type="button" value="" onclick="getval32()" id="myButton33" class="keyboardtblenb"/>
+		<input type="button" value="" onclick="getval33()" id="myButton34" class="keyboardtblenb"/>
+		<input type="button" value="" onclick="getval34()" id="myButton35" class="keyboardtblenb"/>
+		<input type="button" value="" onclick="getval35()" id="myButton36" class="keyboardtblenb"/>
+		<input type="button" value="" onclick="getval36()" id="myButton37" class="keyboardtblenb"/>	
+	</div>	
+	<div id="row3">
+		<input name="Shift" type="button" value="Shift" id="shift" onclick="changef()" class="keyboardtblenb"/>
+		<input type="button" value="" onclick="getval37()" id="myButton38" class="keyboardtblenb"/>
+		<input type="button" value="" onclick="getval38()" id="myButton39" class="keyboardtblenb"/>
+		<input type="button" value="" onclick="getval39()" id="myButton40" class="keyboardtblenb"/>
+		<input type="button" value="" onclick="getval40()" id="myButton41" class="keyboardtblenb"/>
+		<input type="button" value="" onclick="getval41()" id="myButton42" class="keyboardtblenb"/>
+		<input type="button" value="" onclick="getval42()" id="myButton43" class="keyboardtblenb"/>
+		<input type="button" value="" onclick="getval43()" id="myButton44" class="keyboardtblenb"/>
+		<input type="button" value="" onclick="getval44()" id="myButton45" class="keyboardtblenb"/>
+		<input type="button" value="" onclick="getval45()" id="myButton46" class="keyboardtblenb"/>
+		<input type="button" value="" onclick="getval46()" id="myButton47" class="keyboardtblenb"/>
+	</div>
+	
+	<div id="spacebar" >
+		<input name="spacebar" type="button" value=" " class="keyboardtblenbs" onclick="getspace()" />
+	</div>
+	
+</div>
+
+</center>
+</body>
+<script>
+var z=0,fh;//forhelp
+var start=0;
+var fon=0;
+var str1="qwertyuiopasdfghjklzxcvbnm";//small letters
+var str1s="`1234567890-=[]\\;',./"
+var str2="QWERTYUIOPASDFGHJKLZXCVBNM";//capital letters
+var str2s="~!@#$%^&*()_+{}|:\"<>?";
+var max=str1.length;
+var max1=str1s.length;
+var caps=1;
+var exists=[],exists1=[],randomNumber,randomNumber2,fstr1=[],fstr2=[],pass=[],tfstr1=[],tfstr2=[],tfstr1s=[],tfstr2s=[];
+random();
+random1();
+
+function random()
+													{
+														
+														for(var l = 0; l < max; l++) {
+					do {
+					randomNumber = Math.floor(Math.random() * max);
+					} while (exists[randomNumber]==-1);
+
+		exists[randomNumber] = -1;
+		tfstr1=tfstr1+str1[randomNumber];
+		
+		tfstr2=tfstr2+str2[randomNumber];
+		}
+}
+function random1()
+													{
+														
+														for(var p = 0; p < max1; p++) 
+														{
+					do 
+					{
+					randomNumber2 = Math.floor(Math.random() * max1);
+					} while (exists1[randomNumber2]==-1);
+
+		exists1[randomNumber2] = -1;
+		tfstr1s=tfstr1s+str1s[randomNumber2];
+		
+		tfstr2s=tfstr2s+str2s[randomNumber2];
+		}
+}
+fstr1=tfstr1+tfstr1s;
+fstr2=tfstr2+tfstr2s;
+changef();
+
+function changef()
+{
+if(fon==0){
+fh=0
+printo(fstr1);
+fon=1;
+}
+else if(fon==1){
+fh=1
+printo(fstr2);
+fon=0;
+}
+}
+function getval0()
+{
+pass=document.getElementById("v1").value;
+if(fh==0)
+pass=pass+fstr1[0];
+else if(fh==1){
+pass=pass+fstr2[0];
+changef();
+}	
+document.getElementById("v1").value=pass; 
+}
+function getval1()
+{
+pass=document.getElementById("v1").value;
+if(fh==0)
+pass=pass+fstr1[1];
+else if(fh==1){
+pass=pass+fstr2[1];
+changef();
+}	
+document.getElementById("v1").value=pass; 
+}
+function getval2()
+{
+pass=document.getElementById("v1").value;
+if(fh==0)
+pass=pass+fstr1[2];
+else if(fh==1){
+pass=pass+fstr2[2];
+changef();
+}	
+document.getElementById("v1").value=pass; 
+}
+function getval3()
+{
+pass=document.getElementById("v1").value;
+if(fh==0)
+pass=pass+fstr1[3];
+else if(fh==1){
+pass=pass+fstr2[3];
+changef();
+}	
+document.getElementById("v1").value=pass; 
+}
+function getval4()
+{
+pass=document.getElementById("v1").value;
+if(fh==0)
+pass=pass+fstr1[4];
+else if(fh==1){
+pass=pass+fstr2[4];
+changef();
+}	
+document.getElementById("v1").value=pass; 
+}
+function getval5()
+{
+pass=document.getElementById("v1").value;
+if(fh==0)
+pass=pass+fstr1[5];
+else if(fh==1){
+pass=pass+fstr2[5];
+changef();
+}	
+document.getElementById("v1").value=pass; 
+}
+function getval6()
+{
+pass=document.getElementById("v1").value;
+if(fh==0)
+pass=pass+fstr1[6];
+else if(fh==1){
+pass=pass+fstr2[6];
+changef();
+}	
+document.getElementById("v1").value=pass; 
+}
+function getval7()
+{
+pass=document.getElementById("v1").value;
+if(fh==0)
+pass=pass+fstr1[7];
+else if(fh==1){
+pass=pass+fstr2[7];
+changef();
+}	
+document.getElementById("v1").value=pass; 
+}
+function getval8()
+{
+pass=document.getElementById("v1").value;
+if(fh==0)
+pass=pass+fstr1[8];
+else if(fh==1){
+pass=pass+fstr2[8];
+changef();
+}	
+document.getElementById("v1").value=pass; 
+}
+function getval9()
+{
+pass=document.getElementById("v1").value;
+if(fh==0)
+pass=pass+fstr1[9];
+else if(fh==1){
+pass=pass+fstr2[9];
+changef();
+}	
+document.getElementById("v1").value=pass; 
+}
+function getval10()
+{
+pass=document.getElementById("v1").value;
+if(fh==0)
+pass=pass+fstr1[10];
+else if(fh==1){
+pass=pass+fstr2[10];
+changef();
+}	
+document.getElementById("v1").value=pass; 
+}
+function getval11()
+{
+pass=document.getElementById("v1").value;
+if(fh==0)
+pass=pass+fstr1[11];
+else if(fh==1){
+pass=pass+fstr2[11];
+changef();
+}	
+document.getElementById("v1").value=pass; 
+}
+function getval12()
+{
+pass=document.getElementById("v1").value;
+if(fh==0)
+pass=pass+fstr1[12];
+else if(fh==1){
+pass=pass+fstr2[12];
+changef();
+}	
+document.getElementById("v1").value=pass; 
+}
+function getval13()
+{
+pass=document.getElementById("v1").value;
+if(fh==0)
+pass=pass+fstr1[13];
+else if(fh==1){
+pass=pass+fstr2[13];
+changef();
+}	
+document.getElementById("v1").value=pass; 
+}
+function getval14()
+{
+pass=document.getElementById("v1").value;
+if(fh==0)
+pass=pass+fstr1[14];
+else if(fh==1){
+pass=pass+fstr2[14];
+changef();
+}	
+document.getElementById("v1").value=pass; 
+}
+function getval15()
+{
+pass=document.getElementById("v1").value;
+if(fh==0)
+pass=pass+fstr1[15];
+else if(fh==1){
+pass=pass+fstr2[15];
+changef();
+}	
+document.getElementById("v1").value=pass; 
+}
+function getval16()
+{
+pass=document.getElementById("v1").value;
+if(fh==0)
+pass=pass+fstr1[16];
+else if(fh==1){
+pass=pass+fstr2[16];
+changef();
+}	
+document.getElementById("v1").value=pass; 
+}
+function getval17()
+{
+pass=document.getElementById("v1").value;
+if(fh==0)
+pass=pass+fstr1[17];
+else if(fh==1){
+pass=pass+fstr2[17];
+changef();
+}	
+document.getElementById("v1").value=pass; 
+}
+function getval18()
+{
+pass=document.getElementById("v1").value;
+if(fh==0)
+pass=pass+fstr1[18];
+else if(fh==1){
+pass=pass+fstr2[18];
+changef();
+}	
+document.getElementById("v1").value=pass; 
+}
+function getval19()
+{
+pass=document.getElementById("v1").value;
+if(fh==0)
+pass=pass+fstr1[19];
+else if(fh==1){
+pass=pass+fstr2[19];
+changef();
+}	
+document.getElementById("v1").value=pass; 
+}
+function getval20()
+{
+pass=document.getElementById("v1").value;
+if(fh==0)
+pass=pass+fstr1[20];
+else if(fh==1){
+pass=pass+fstr2[20];
+changef();
+}	
+document.getElementById("v1").value=pass; 
+}
+function getval21()
+{
+pass=document.getElementById("v1").value;
+if(fh==0)
+pass=pass+fstr1[21];
+else if(fh==1){
+pass=pass+fstr2[21];
+changef();
+}	
+document.getElementById("v1").value=pass; 
+}
+
+function getval22()
+{
+pass=document.getElementById("v1").value;
+if(fh==0)
+pass=pass+fstr1[22];
+else if(fh==1){
+pass=pass+fstr2[22];
+changef();
+}	
+document.getElementById("v1").value=pass; 
+}
+function getval23()
+{
+pass=document.getElementById("v1").value;
+if(fh==0)
+pass=pass+fstr1[23];
+else if(fh==1){
+pass=pass+fstr2[23];
+changef();
+}	
+document.getElementById("v1").value=pass; 
+}
+function getval24()
+{
+pass=document.getElementById("v1").value;
+if(fh==0)
+pass=pass+fstr1[24];
+else if(fh==1){
+pass=pass+fstr2[24];
+changef();
+}	
+document.getElementById("v1").value=pass; 
+}
+function getval25()
+{
+pass=document.getElementById("v1").value;
+if(fh==0)
+pass=pass+fstr1[25];
+else if(fh==1){
+pass=pass+fstr2[25];
+changef();
+}	
+document.getElementById("v1").value=pass; 
+}
+function getval26()
+{
+pass=document.getElementById("v1").value;
+if(fh==0)
+pass=pass+fstr1[26];
+else if(fh==1){
+pass=pass+fstr2[26];
+changef();
+}	
+document.getElementById("v1").value=pass; 
+}
+function getval27()
+{
+pass=document.getElementById("v1").value;
+if(fh==0)
+pass=pass+fstr1[27];
+else if(fh==1){
+pass=pass+fstr2[27];
+changef();
+}	
+document.getElementById("v1").value=pass; 
+}
+function getval28()
+{
+pass=document.getElementById("v1").value;
+if(fh==0)
+pass=pass+fstr1[28];
+else if(fh==1){
+pass=pass+fstr2[28];
+changef();
+}	
+document.getElementById("v1").value=pass; 
+}
+function getval29()
+{
+pass=document.getElementById("v1").value;
+if(fh==0)
+pass=pass+fstr1[29];
+else if(fh==1){
+pass=pass+fstr2[29];
+changef();
+}	
+document.getElementById("v1").value=pass; 
+}
+function getval30()
+{
+pass=document.getElementById("v1").value;
+if(fh==0)
+pass=pass+fstr1[30];
+else if(fh==1){
+pass=pass+fstr2[30];
+changef();
+}	
+document.getElementById("v1").value=pass; 
+}
+function getval31()
+{
+pass=document.getElementById("v1").value;
+if(fh==0)
+pass=pass+fstr1[31];
+else if(fh==1){
+pass=pass+fstr2[31];
+changef();
+}	
+document.getElementById("v1").value=pass; 
+}
+function getval32()
+{
+pass=document.getElementById("v1").value;
+if(fh==0)
+pass=pass+fstr1[32];
+else if(fh==1){
+pass=pass+fstr2[32];
+changef();
+}	
+document.getElementById("v1").value=pass; 
+}
+function getval33()
+{
+pass=document.getElementById("v1").value;
+if(fh==0)
+pass=pass+fstr1[33];
+else if(fh==1){
+pass=pass+fstr2[33];
+changef();
+}	
+document.getElementById("v1").value=pass; 
+}
+function getval34()
+{
+pass=document.getElementById("v1").value;
+if(fh==0)
+pass=pass+fstr1[34];
+else if(fh==1){
+pass=pass+fstr2[34];
+changef();
+}	
+document.getElementById("v1").value=pass; 
+}
+function getval35()
+{
+pass=document.getElementById("v1").value;
+if(fh==0)
+pass=pass+fstr1[35];
+else if(fh==1){
+pass=pass+fstr2[35];
+changef();
+}	
+document.getElementById("v1").value=pass; 
+}
+function getval36()
+{
+pass=document.getElementById("v1").value;
+if(fh==0)
+pass=pass+fstr1[36];
+else if(fh==1){
+pass=pass+fstr2[36];
+changef();
+}	
+document.getElementById("v1").value=pass; 
+}
+function getval37()
+{
+pass=document.getElementById("v1").value;
+if(fh==0)
+pass=pass+fstr1[37];
+else if(fh==1){
+pass=pass+fstr2[37];
+changef();
+}	
+document.getElementById("v1").value=pass; 
+}
+function getval38()
+{
+pass=document.getElementById("v1").value;
+if(fh==0)
+pass=pass+fstr1[38];
+else if(fh==1){
+pass=pass+fstr2[38];
+changef();
+}	
+document.getElementById("v1").value=pass; 
+}
+function getval39()
+{
+pass=document.getElementById("v1").value;
+if(fh==0)
+pass=pass+fstr1[39];
+else if(fh==1){
+pass=pass+fstr2[39];
+changef();
+}	
+document.getElementById("v1").value=pass; 
+}
+function getval40()
+{
+pass=document.getElementById("v1").value;
+if(fh==0)
+pass=pass+fstr1[40];
+else if(fh==1){
+pass=pass+fstr2[40];
+changef();
+}	
+document.getElementById("v1").value=pass; 
+}
+function getval41()
+{
+pass=document.getElementById("v1").value;
+if(fh==0)
+pass=pass+fstr1[41];
+else if(fh==1){
+pass=pass+fstr2[41];
+changef();
+}	
+document.getElementById("v1").value=pass; 
+}
+function getval42()
+{
+pass=document.getElementById("v1").value;
+if(fh==0)
+pass=pass+fstr1[42];
+else if(fh==1){
+pass=pass+fstr2[42];
+changef();
+}	
+document.getElementById("v1").value=pass; 
+}
+function getval43()
+{
+pass=document.getElementById("v1").value;
+if(fh==0)
+pass=pass+fstr1[43];
+else if(fh==1){
+pass=pass+fstr2[43];
+changef();
+}	
+document.getElementById("v1").value=pass; 
+}
+function getval44()
+{
+pass=document.getElementById("v1").value;
+if(fh==0)
+pass=pass+fstr1[44];
+else if(fh==1){
+pass=pass+fstr2[44];
+changef();
+}	
+document.getElementById("v1").value=pass; 
+}
+function getval45()
+{
+pass=document.getElementById("v1").value;
+if(fh==0)
+pass=pass+fstr1[45];
+else if(fh==1){
+pass=pass+fstr2[45];
+changef();
+}	
+document.getElementById("v1").value=pass; 
+} 
+function getval46()
+{
+pass=document.getElementById("v1").value;
+if(fh==0)
+pass=pass+fstr1[46];
+else if(fh==1){
+pass=pass+fstr2[46];
+changef();
+}	
+document.getElementById("v1").value=pass; 
+}
+function getspace()
+{
+pass=document.getElementById("v1").value;
+pass=pass+" ";
+document.getElementById("v1").value=pass; 
+}
+function getback()
+{
+var temp="";
+var backspace;
+pass=document.getElementById("v1").value;
+backspace=pass.length;
+backspace=backspace-1;
+for(var i=0;i<backspace;i++)
+{
+temp=temp+pass[i];
+
+}
+pass=temp;	
+temp="";
+document.getElementById("v1").value=pass; 
+}
+function getcaps()
+{
+if(caps==1)
+{
+fstr1=tfstr2+tfstr1s;
+fstr2=tfstr1+tfstr2s; 
+caps=2;
+fh=0;
+printo(fstr1);
+}
+else if(caps==2)
+{
+fstr1=tfstr1+tfstr1s;
+fstr2=tfstr2+tfstr2s;
+caps=1;
+fh=0;
+printo(fstr1);
+}
+}
+
+
+
+
+
+
+
+
+function printo(fr2)
+{
+document.getElementById("myButton1").defaultValue=fr2[0];
+document.getElementById("myButton2").defaultValue=fr2[1];
+document.getElementById("myButton3").defaultValue=fr2[2];
+document.getElementById("myButton4").defaultValue=fr2[3];
+document.getElementById("myButton5").defaultValue=fr2[4];
+document.getElementById("myButton6").defaultValue=fr2[5];
+document.getElementById("myButton7").defaultValue=fr2[6];
+document.getElementById("myButton8").defaultValue=fr2[7];
+document.getElementById("myButton9").defaultValue=fr2[8];
+document.getElementById("myButton10").defaultValue=fr2[9];
+document.getElementById("myButton11").defaultValue=fr2[10];
+document.getElementById("myButton12").defaultValue=fr2[11];
+document.getElementById("myButton13").defaultValue=fr2[12];
+document.getElementById("myButton14").defaultValue=fr2[13];
+document.getElementById("myButton15").defaultValue=fr2[14];
+document.getElementById("myButton16").defaultValue=fr2[15];
+document.getElementById("myButton17").defaultValue=fr2[16];
+document.getElementById("myButton18").defaultValue=fr2[17];
+document.getElementById("myButton19").defaultValue=fr2[18];
+document.getElementById("myButton20").defaultValue=fr2[19];
+document.getElementById("myButton21").defaultValue=fr2[20];
+document.getElementById("myButton22").defaultValue=fr2[21];
+document.getElementById("myButton23").defaultValue=fr2[22];
+document.getElementById("myButton24").defaultValue=fr2[23];
+document.getElementById("myButton25").defaultValue=fr2[24];
+document.getElementById("myButton26").defaultValue=fr2[25];
+document.getElementById("myButton27").defaultValue=fr2[26];
+document.getElementById("myButton28").defaultValue=fr2[27];
+document.getElementById("myButton29").defaultValue=fr2[28];
+document.getElementById("myButton30").defaultValue=fr2[29];
+document.getElementById("myButton31").defaultValue=fr2[30];
+document.getElementById("myButton32").defaultValue=fr2[31];
+document.getElementById("myButton33").defaultValue=fr2[32];
+document.getElementById("myButton34").defaultValue=fr2[33];
+document.getElementById("myButton35").defaultValue=fr2[34];
+document.getElementById("myButton36").defaultValue=fr2[35];
+document.getElementById("myButton37").defaultValue=fr2[36];
+document.getElementById("myButton38").defaultValue=fr2[37];
+document.getElementById("myButton39").defaultValue=fr2[38];
+document.getElementById("myButton40").defaultValue=fr2[39];
+document.getElementById("myButton41").defaultValue=fr2[40];
+document.getElementById("myButton42").defaultValue=fr2[41];
+document.getElementById("myButton43").defaultValue=fr2[42];
+document.getElementById("myButton44").defaultValue=fr2[43];
+document.getElementById("myButton45").defaultValue=fr2[44];
+document.getElementById("myButton46").defaultValue=fr2[45];
+document.getElementById("myButton47").defaultValue=fr2[46];
+}
+
+</script>	
+				  </div>
+</div>
+</center>
+<div id="wheel" style="display : none">
+<canvas id="myCanvas" width="800" height="350" >
+</canvas>
+
+<script>
+
+
+//lines
+//for entering in textbox
+//i_for_important
+var i=11;
+var pass="";
+var arcno=0;
+var x;
+var x1=650,y1=200;
+//selected color and password
+ var col="red"; <!--"<?php echo $color ?>"; 		-->
+var a="Aashu348"; <!--"<?php echo $pass ?>";-->
+
+function login()
+{	
+	var pass=document.getElementById("v1").value;
+	var a1="Aashu348";
+	if (pass == a1)
+	{
+		alert("Success");
+        window.location.href = "\welcome.html";
+    
+	}
+	else
+	{
+	alert("Incorrect password");
+	}
+}
+
+//for arc
+var colours = ["red", "green", "blue", "yellow", "orange", "grey", "black", "pink"];
+//for function randy functionf
+var exists = [],str="",
+    randomNumber,
+    max = a.length;
+	//for charleft function
+var Lexists = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
+    Ltext="";
+function randy(a)
+{
+
+		for(var l = 0; l < max; l++) {
+					do {
+					randomNumber = Math.floor(Math.random() * max);
+					} while (exists[randomNumber]==-1);
+
+		exists[randomNumber] = -1;
+		str=str+a[randomNumber];
+		}
+if(str.length < 15)
+ {
+ cleft=charleft(str);
+}
+str=str+cleft;
+   return str;
+ }
+													function charleft(str)
+													{
+														
+														for(var y= str.length; y < 16;y++)
+														{
+														Ltext+=Lexists.charAt(Math.floor(Math.random()*Lexists.length))
+														}
+														return Ltext;
+													}
+a=randy(a);
+		var c = document.getElementById("myCanvas");
+		var ctx = c.getContext("2d");
+		ctx.beginPath();
+		ctx.moveTo(x1,y1);
+		ctx.lineTo(650,70);
+
+		ctx.stroke();
+
+		var c = document.getElementById("myCanvas");
+		var ctx = c.getContext("2d");
+		ctx.beginPath();
+		ctx.moveTo(x1,y1);
+		ctx.lineTo(560,108);
+
+		ctx.stroke();
+
+		var c = document.getElementById("myCanvas");
+		var ctx = c.getContext("2d");
+		ctx.beginPath();
+		ctx.moveTo(x1,y1);
+		ctx.lineTo(518,200);
+
+		ctx.stroke();
+
+		var c = document.getElementById("myCanvas");
+		var ctx = c.getContext("2d");
+		ctx.beginPath();
+		ctx.moveTo(x1,y1);
+		ctx.lineTo(560,292);
+
+		ctx.stroke();
+
+		var c = document.getElementById("myCanvas");
+		var ctx = c.getContext("2d");
+		ctx.beginPath();
+		ctx.moveTo(x1,y1);
+		ctx.lineTo(650,330);
+
+		ctx.stroke();
+
+		var c = document.getElementById("myCanvas");
+		var ctx = c.getContext("2d");
+		ctx.beginPath();
+		ctx.moveTo(x1,y1);
+		ctx.lineTo(742,292);
+
+		ctx.stroke();
+
+		var c = document.getElementById("myCanvas");
+		var ctx = c.getContext("2d");
+		ctx.beginPath();
+		ctx.moveTo(x1,y1);
+		ctx.lineTo(780,200);
+		
+		ctx.stroke();
+
+		var c = document.getElementById("myCanvas");
+		var ctx = c.getContext("2d");
+		ctx.beginPath();
+		ctx.moveTo(x1,y1);
+		ctx.lineTo(742,108);
+		f();
+		ctx.stroke();
+
+function f()
+{
+ctx.font="20px Verdana";
+	ctx.fillText(a[0],600,100);	//1  //o
+	ctx.fillText(a[1],630,175);	//2  //i
+ctx.fillText(a[8],600,195);	//a  //i
+ctx.fillText(a[9],540,165);	//b  //o
+	ctx.fillText(a[10],600,225);	//c  //i
+	ctx.fillText(a[11],550,250);	//d  //o
+ctx.fillText(a[4],605,314);	//5  //o
+ctx.fillText(a[5],620,250);	//6  //i
+	ctx.fillText(a[14],660,250);	//g  //i
+	ctx.fillText(a[15],680,310);	//h  //o
+ctx.fillText(a[2],744,255);	//3  //o
+ctx.fillText(a[3],685,225);	//4  //i
+	ctx.fillText(a[6],675,190);	//7   //i
+	ctx.fillText(a[7],744,170);	//8  //o
+ctx.fillText(a[12],655,178);	//e  //i
+ctx.fillText(a[13],685,100);	//f  //o
+
+}
+
+
+
+//lines
+
+// coloring arcs
+
+
+mainFunction(7);
+
+//ratating arcs finish
+function rotate1()
+{
+i++;
+		if(i>=8)
+		{
+		i=0;
+		}
+switch(i)
+{
+case 0:		mainFunction(i);
+		
+		break;
+case 1:		mainFunction(i);
+		
+		break;
+case 2:		mainFunction(i);
+		
+		break;
+case 3:		mainFunction(i);
+		
+		break;
+case 4:		mainFunction(i);
+		
+		break;
+case 5:		mainFunction(i);
+		
+		break;
+case 6:		mainFunction(i);
+		
+		break;
+case 7:		mainFunction(i);
+
+
+} 
+}
+		
+			//drawing_and_coloring_arcs
+
+		
+		
+function rotate2()
+{
+i--;
+		if(i==-1)
+		{
+		i=7;
+		}
+		if(i==10)
+		{
+		i=6;
+		}
+switch(i)
+{
+case 0:		mainFunction(i);
+		
+		break;
+case 1:		mainFunction(i);
+		
+		break;
+case 2:		mainFunction(i);
+		
+		break;
+case 3:		mainFunction(i);
+		
+		break;
+case 4:		mainFunction(i);
+		
+		break;
+case 5:		mainFunction(i);
+		
+		break;
+case 6:		mainFunction(i);
+		
+		break;
+case 7:		mainFunction(i);
+
+
+} 
+}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		function mainFunction(j)
+{
+		var c = document.getElementById("myCanvas");
+		var ctx = c.getContext("2d");
+		ctx.beginPath();
+		ctx.arc(x1,y1,130,0, 0.25*Math.PI);
+		ctx.lineWidth=5;
+		if(j==8)
+		j=0
+		ctx.strokeStyle=colours[j];
+		if(colours[j]==col)
+		{arcno=1;}
+		j++;
+		ctx.stroke();
+
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
+ctx.beginPath();
+ctx.arc(x1,y1,130,0.25*Math.PI, 0.50*Math.PI);
+ctx.lineWidth=5;
+if(j==8)
+j=0
+ctx.strokeStyle=colours[j];
+		if(colours[j]==col)
+		arcno=2;
+j++;
+ctx.stroke();
+
+		var c = document.getElementById("myCanvas");
+		var ctx = c.getContext("2d");
+		ctx.beginPath();
+		ctx.arc(x1,y1,130,0.50*Math.PI, 0.75*Math.PI);
+		ctx.lineWidth=5;
+		if(j==8)
+		j=0
+		ctx.strokeStyle=colours[j];
+		if(colours[j]==col)
+		arcno=3;
+		j++;
+		ctx.stroke();
+
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
+ctx.beginPath();
+ctx.arc(x1,y1,130,0.75*Math.PI, 1.0*Math.PI);
+ctx.lineWidth=5;
+if(j==8)
+j=0
+ctx.strokeStyle=colours[j];
+		if(colours[j]==col)
+		arcno=4;
+j++;
+ctx.stroke();
+
+		var c = document.getElementById("myCanvas");
+		var ctx = c.getContext("2d");
+		ctx.beginPath();
+		ctx.arc(x1,y1,130,1.0*Math.PI, 1.25*Math.PI);
+		ctx.lineWidth=5;
+		if(j==8)
+		j=0
+		ctx.strokeStyle=colours[j];
+		if(colours[j]==col)
+		arcno=5;
+		j++;
+		ctx.stroke();
+
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
+ctx.beginPath();
+ctx.arc(x1,y1,130,1.25*Math.PI, 1.50*Math.PI);
+ctx.lineWidth=5;
+if(j==8)
+j=0
+ctx.strokeStyle=colours[j];
+		if(colours[j]==col)
+		arcno=6;
+j++;
+ctx.stroke();
+
+		var c = document.getElementById("myCanvas");
+		var ctx = c.getContext("2d");
+		ctx.beginPath();
+		ctx.arc(x1,y1,130,1.50*Math.PI, 1.75*Math.PI);
+		ctx.lineWidth=5;
+		if(j==8)
+		j=0
+		ctx.strokeStyle=colours[j];
+		if(colours[j]==col)
+		arcno=7;
+		j++;
+		ctx.stroke();
+
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
+ctx.beginPath();
+ctx.arc(x1,y1,130,1.75*Math.PI, 2.0*Math.PI);
+ctx.lineWidth=5;
+if(j==8)
+j=0
+ctx.strokeStyle=colours[j];
+		if(colours[j]==col)
+		arcno=8;
+j++;
+ctx.stroke(); 
+}
+
+function inner()
+{
+if(arcno==1)
+{
+pass=document.getElementById("v1").value;
+pass=pass+a[3];}//4
+else if(arcno==2)
+{
+pass=document.getElementById("v1").value;
+pass=pass+a[14];}//g
+else if(arcno==3)
+{
+pass=document.getElementById("v1").value;
+pass=pass+a[5];}
+else if(arcno==4)
+{
+pass=document.getElementById("v1").value;
+pass=pass+a[10];}
+else if(arcno==5)
+{
+pass=document.getElementById("v1").value;
+pass=pass+a[8];}
+else if(arcno==6)
+{
+pass=document.getElementById("v1").value;
+pass=pass+a[1];}
+else if(arcno==7)
+{
+pass=document.getElementById("v1").value;
+pass=pass+a[12];}
+else
+{
+pass=document.getElementById("v1").value;
+pass=pass+a[6];
+}
+
+document.getElementById("v1").value=pass; 
+}		
+function outer()
+{
+if(arcno==1)
+{
+pass=document.getElementById("v1").value;
+pass=pass+a[2];}//3
+else if(arcno==2)
+{
+pass=document.getElementById("v1").value;
+pass=pass+a[15];}//h
+else if(arcno==3)
+{
+pass=document.getElementById("v1").value;
+pass=pass+a[4];}
+else if(arcno==4)
+{
+pass=document.getElementById("v1").value;
+pass=pass+a[11];}
+else if(arcno==5)
+{
+pass=document.getElementById("v1").value;
+pass=pass+a[9];}
+else if(arcno==6)
+{
+pass=document.getElementById("v1").value;
+pass=pass+a[0];}
+else if(arcno==7)
+{
+pass=document.getElementById("v1").value;
+pass=pass+a[13];}
+else
+{
+pass=document.getElementById("v1").value;
+pass=pass+a[7];
+}
+document.getElementById("v1").value=pass; 
+}
+
+      
+
+
+</script>
+<center><button type="button" onclick="rotate2()" align="right">Rotate Right</button>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<button type="button" onclick="rotate1()">Rotate Left</button>
+</center>
+<center>
+<button type="button" onclick="inner()">inner orbit</button>
+<button button type="button" onclick="outer()">outer orbit</button></center>
+</div>
+
+
+</p>
+
+</body>
+</html>
